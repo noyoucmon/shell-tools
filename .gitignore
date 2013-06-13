@@ -1,0 +1,8 @@
+﻿.*
+*~
+.DS_Store
+._*
+.Trashes
+Thumbs.db 
+Desktop.ini
+!.gitignore
