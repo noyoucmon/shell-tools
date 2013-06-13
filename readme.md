@@ -10,5 +10,5 @@ export PATH="/path/to/noyoucmon/shell-tools/bin:$PATH"
 Exports the current repo into a ZIP file. `-b` defaults to `master`.
 
 ```bash
-git export [-b BRANCH]
+git-export [-b BRANCH]
 ```
