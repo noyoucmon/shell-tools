@@ -24,5 +24,5 @@ kk-imageresize -size "widthxheight"
 # Options
 -s, --size  "widthxheight"  Set destination size 
                             and destination folder name
- -h, --help                 Display this help message
+-h, --help                  Display this help message
 ```
