@@ -19,9 +19,10 @@ Puts resized images in a directory named like the --size parameter.
 
 ```bash
 # Usage
-    kk-imageresize -size "widthxheight"
+kk-imageresize -size "widthxheight"
 
 # Options
-    -s, --size  "widthxheight"  Set destination size (which is also the name of the resized images' destination folder)
-    -h, --help                  Display this help message"
+-s, --size  "widthxheight"  Set destination size 
+                            and destination folder name
+ -h, --help                 Display this help message
 ```
