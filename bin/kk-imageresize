@@ -4,7 +4,7 @@
 # Batch resize image with imagemagick's convert command
 #
 # Usage
-#   $>  kk-imageresize -size "widthxheight"
+#   $>  kk-imageresize --size "widthxheight"
 #
 # Options
 #   -s, --size  "widthxheight"  Set destination size (which is also the name of the resized images' destination folder)
@@ -44,7 +44,7 @@ do
             ;;
         "-h"|"--help" )
             echo $SEP "Usage:"
-            echo "kk-imageresize -s \"widthxheight\""
+            echo "kk-imageresize --size \"widthxheight\""
             echo "-s, --size \tsize \"widthxheight\""
             echo "-h, --help \tdisplay this help message"
             ;;
