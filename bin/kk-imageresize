@@ -29,7 +29,7 @@ do
                     if [ ! -d "$file" ]; then
                         ext=$(echo "$file" |awk -F . '{if (NF>1) {print $NF}}')
                         name=$(basename "$file" "."$ext)
-                        test=$(identify -quiet $file 2>&1 | grep -c "no decode")
+                        test=$(identify -quiet "$file" 2>&1 | grep -c "no decode")
                         if [ ! $test -eq 0 ]; then
                            echo $SEP "Processing \"$file\"."
                            echo $SEP "\t\033[31mError: cannot process file, maybe not an image file.\033[0m"
