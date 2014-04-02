@@ -6,11 +6,24 @@ Shell scripts that might come in quite handy. You can add the `bin` folder to yo
 export PATH="/path/to/noyoucmon/shell-tools/bin:$PATH"
 ```
 
+## kk-filesexist
+Check directory content against a file list. The text file containing teh file list must contain one file path on each line.
+
+Contents of "filelist.txt"
+```bash
+/this/my/file.png
+/this/my/other/file.jpg
+```
+
+```bash
+kk-filesexist --list "filelist.txt"
+```
+
 ## kk-gitexport
 Exports the current repo into a ZIP file. `-b` defaults to `master`.
 
 ```bash
-kk-git-export [-b BRANCH]
+kk-gitexport [-b BRANCH]
 ```
 
 ## kk-imageresize

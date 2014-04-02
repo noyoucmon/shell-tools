@@ -1,0 +1,58 @@
+#! /bin/sh
+
+##
+# Check directory content against a file list
+#
+# Usage
+#   $>  kk-filesexist --list "filelist.txt"
+#
+# Options
+#   -l, --list  "filelist.txt"  A text file containing a list of file paths. Must be one file path each line.
+#   -h, --help                  Display this help message"
+#
+
+SEP="\033[35m>>>\033[0m"
+
+while [[ $# -gt 0 ]] && [[ ."$1" = .-* ]] ;
+do
+    opt="$1";
+    shift;
+    case "$opt" in
+        "-l"|"--list" )
+            echo $SEP "\033[35mProcessing file list from file \"$1\"\033[0m"
+            resultlist=()
+                while read line
+                do
+                    if  test ! -s "$line"
+                        then
+                            name=$(basename "$line")
+                            resultlist[$index]=$name
+                            ((index++))
+                    fi
+                    ((filecount++))
+                done < $1
+            size=${#resultlist[@]}
+            if [ $size -gt 0 ]
+                then
+                    echo $SEP "\033[31m$size out of $filecount files were found missing:\033[0m"
+                    for i in "${resultlist[@]}"
+                        do
+                           echo "$i"
+                        done
+                else
+                    echo $SEP "\033[32mNo files were found missing.\033[0m $filecount files were checked."
+            fi
+            shift
+            ;;
+        "-h"|"--help" )
+            echo $SEP "Usage:"
+            echo "kk-filesexist --list \"filelist.txt\""
+            echo "-l, --list \tfile list \"filelist.txt\""
+            echo "-h, --help \tdisplay this help message"
+            ;;
+        *)
+            echo >&2 $SEP "Sorry, \"$opt\" is not an option.";
+            exit 1
+            ;;
+   esac
+done
