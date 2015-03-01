@@ -8,49 +8,66 @@
 #
 # Options
 #   -s, --size  "widthxheight"  Set destination size (which is also the name of the resized images' destination folder)
-#   -h, --help                  Display this help message"
+#   -f, --format                Set the destination file format
+#   -h, --help                  Display this help message
 #
 
 SEP="\033[35m>>>\033[0m"
 
-while [[ $# -gt 0 ]] && [[ ."$1" = .-* ]] ;
-do
-    opt="$1";
-    shift;
-    case "$opt" in
+while test $# -gt 0; do
+    case "$1" in
         "-s"|"--size" )
+            shift
             size=$1
-            echo $SEP "\033[31mResizing files to $size px.\033[0m"
-            if [ ! -d "$size" ]; then
-                mkdir "$size"
-            fi
-            for file in *
-                do
-                    if [ ! -d "$file" ]; then
-                        ext=$(echo "$file" |awk -F . '{if (NF>1) {print $NF}}')
-                        name=$(basename "$file" "."$ext)
-                        test=$(identify -quiet "$file" 2>&1 | grep -c "no decode")
-                        if [ ! $test -eq 0 ]; then
-                           echo $SEP "Processing \"$file\"."
-                           echo $SEP "\t\033[31mError: cannot process file, maybe not an image file.\033[0m"
-                        else
-                            echo $SEP "Processing \"$file\"."
-                            convert "$file" -resize $size "$size/$name-$size.$ext"
-                        fi
-                    fi
-                done
-            echo $SEP "\033[32mdone\033[0m"
+            shift
+            ;;
+        "-f"|"--format" )
+            shift
+            format=$1
             shift
             ;;
         "-h"|"--help" )
             echo $SEP "Usage:"
             echo "kk-imageresize --size \"widthxheight\""
             echo "-s, --size \tsize \"widthxheight\""
+            echo ""-f, --format \tset the destination file format
             echo "-h, --help \tdisplay this help message"
+            exit 1
             ;;
         *)
-            echo >&2 $SEP "Sorry, \"$opt\" is not an option.";
+            echo >&2 $SEP "Sorry, \"$1\" is not an option.";
             exit 1
             ;;
    esac
 done
+
+echo $SEP "\033[31mSize: $size, Format: $format\033[0m"
+
+if [ -n "$size" ]; then
+  echo $SEP "\033[31mResizing files to $size px.\033[0m"
+  if [ ! -d "$size" ]; then
+      mkdir "$size"
+  fi
+  for file in *
+      do
+          if [ ! -d "$file" ]; then
+              if [ -n "$format" ]; then
+                ext=$format
+                echo $SEP "Setting file format to \033[31m$ext.\033[0m"
+              else
+                ext=$(echo "$file" |awk -F . '{if (NF>1) {print $NF}}')
+              fi
+              name=$(basename "$file" "."$ext)
+              test=$(identify -quiet "$file" 2>&1 | grep -c "no decode")
+              if [ ! $test -eq 0 ]; then
+                 echo $SEP "Processing \"$file\"."
+                 echo $SEP "\t\033[31mError: cannot process file, maybe not an image file.\033[0m"
+              else
+                  echo $SEP "Processing \"$file\"."
+                  convert "$file" -resize $size "$size/$name-$size.$ext"
+              fi
+          fi
+      done
+  echo $SEP "\033[32mdone\033[0m"
+  shift
+fi
