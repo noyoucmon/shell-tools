@@ -32,10 +32,11 @@ Resized images are put in a directory named after the `--size` parameter, e. g, 
 
 ```bash
 # Usage
-kk-imageresize --size "widthxheight"
+kk-imageresize --size "widthxheight" --format png
 
 # Options
--s, --size  "widthxheight"  Set destination size 
+-s, --size  "widthxheight"  Set destination size
                             and destination folder name
+-f, --format                Set the destination file format
 -h, --help                  Display this help message
 ```
