@@ -4,7 +4,7 @@
 # Check directory content against a file list
 #
 # Usage
-#   $>  kk-filesexist --list "filelist.txt"
+#   $>  x-filesexist --list "filelist.txt"
 #
 # Options
 #   -l, --list  "filelist.txt"  A text file containing a list of file paths. Must be one file path each line.
@@ -46,7 +46,7 @@ do
             ;;
         "-h"|"--help" )
             echo $SEP "Usage:"
-            echo "kk-filesexist --list \"filelist.txt\""
+            echo "x-filesexist --list \"filelist.txt\""
             echo "-l, --list \tfile list \"filelist.txt\""
             echo "-h, --help \tdisplay this help message"
             ;;
